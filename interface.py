@@ -1,23 +1,21 @@
 """
-    streamlit frontend interface for JLPT questions.
+    streamlit interface for JLPT questions.
 """
 
 import streamlit as st
-from plugins import (
-    general_summary,
-    KanjiMondai
-)
+from plugins import KanjiMondai
+from core.brain import Brain
 
-# load_files()
 
 # mondais = csv_to_kanji_mondais("data/mock/mock.csv")
 # mondai_id, instruction = mondais[0].MONDAI_ID, mondais[0].INSTRUCTION
+brain = Brain()
 
 m1 = KanjiMondai(
     id=1,
     description="これから<u><b>概略</b></u>をご説明します。",
     choices=["がいかく", "きかく", "がいりゃく", "きりゃく"],
-    answer_idx=0
+    answer_idx=2,
 )
 
 question_id, question_text, options  = m1.id, m1.description, m1.choices
@@ -52,4 +50,7 @@ if submit:
         st.success("回答正确")
     else:
         st.error("回答错误")
-    general_summary(question_text)
+    
+    stream = brain.general_analyse_stream(m1)
+    
+    st.write_stream(stream=stream)

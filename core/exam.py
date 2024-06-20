@@ -1,8 +1,6 @@
 from pydantic import BaseModel, Field
-from dataclasses import dataclass
 from typing import Literal
 
-@dataclass
 class MultipleChoice(BaseModel):
     id: int = Field(ge=1, le=70) # 题号，在每一张试卷中是固定的，range(1, 71)
     description: str             # 问题的 description，小题的题干
@@ -14,6 +12,9 @@ class MultipleChoice(BaseModel):
             return choice == self.answer_idx
         else:
             return choice == self.choices[self.answer_idx]
+    
+    def __str__(self):
+        return f"{self.id}. {self.description}\n" + " ".join([f"{i + 1}. {self.choices[i]}" for i in range(4)])
         
 class MondaiSet(BaseModel):
     instruction: str                    # 大题的题干
