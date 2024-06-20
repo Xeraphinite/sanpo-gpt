@@ -2,3 +2,4 @@ streamlit
 litellm
 python-dotenv
 pytest
+pydantic
