@@ -36,15 +36,15 @@ class Brain(BaseModel):
 
     def general_analyse_stream(self, instruction: list[Message], few_shots: list[Message], context: list[Message]):
         wrapped_messages = [
-            Message(role="assistant", content="你是一个循循善诱的 JLPT 日语老师，现在你需要帮助学生详细解析下面的问题，让学生更好地理解题目。你应当使用**中文**解析。你应当根据以下例子输出解析的结果。"),
-        ] + instruction + few_shots + [
+            Message(role="assistant", content="你是一个循循善诱的 JLPT 日语老师，现在你需要帮助学生详细解析下面的问题，让学生更好地理解题目。你应当使用**中文**解析。你应当仿照以下例子输出解析的结果。问题的要求如下："),
+        ] + instruction + [
+            Message(role="system", content="问题解析例如下：")
+        ] + few_shots + [
             Message(role="system", content="接下来是你需要解析的问题："),
         ] + context + [
             Message(role="system", content="请注意：在所有的解析中，注音的时候用平假名，不要用罗马音。你不需要重新输出题干，只需要解析即可。你不应当输出解释性语句，如“好的，让我们一步步”"),
             Message(role="system", content="请开始解析：")
         ]
-        
-        print(wrapped_messages)
         
         return self.stream(wrapped_messages)
 

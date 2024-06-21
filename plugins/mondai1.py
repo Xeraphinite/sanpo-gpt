@@ -44,9 +44,9 @@ def mondai1_analyse(mondai: KanjiMondai) -> Generator:
     
     instruct_message = [
         Message(role="system", content="问题解析需要包括：\n"
-                "1. 整句话的含义；\n"
-                "2. 正确选项读音的汉字含义；\n"
-                "3. 其他选项读音的汉字含义（若有），若其他选项在 JLPT N1 范围内没有对应的常见汉字，则应当输出“其他选项无对应常见汉字，为干扰项”；\n")
+                "整句话的中文意思；\n"
+                "正确选项读音的汉字含义；\n"
+                "其他选项读音对应的汉字及其解释（若有），若该选项在 JLPT N1 范围内没有对应的常见汉字，则应当输出“该选项无对应常见汉字，为干扰项”，同时不输出该选项；\n")
     ]
     
     one_shot_mondai1 = KanjiMondai(
@@ -66,19 +66,23 @@ def mondai1_analyse(mondai: KanjiMondai) -> Generator:
     one_shot_messages = [
         Message(role="system", content=one_shot_mondai1.INSTRUCTION),
         Message(role="system", content=one_shot_mondai1.description),
-        Message(role="system", content="""想成为受学生敬仰的老师。
+        Message(role="system", content="""**句意**:想成为受学生敬仰的老师。
 1.したう（慕う）【他五】敬慕,敬仰,景仰。「したわれる」是它的被动态。
 2.したがう（従う）【自五】按照,遵从。「したがわれる」是它的被动态。
 3.うやまう（敬う）【他五】尊敬,尊重。「うやまわれる」是它的被动态。
 4.ともなう（伴う）【自他五】伴随,陪同。「ともなわれる」是它的被动态。"""),
         Message(role="system", content=one_shot_mondai2.description),
-        Message(role="system", content="""申请书上附上了护照复印件。
+        Message(role="system", content="""**句意**：申请书上附上了护照复印件。
 4.添付（てんぷ）:【名】【他サ】添上;付上。
 其他选项均为干扰项。"""),
     ]
 
     context_messages = [
-        Message(content=str(mondai), role="user")
+        # Message(role="system", content=f"输出格式如下（[MASK]中内容需要替换）："
+        #         "**句意**：[中文的句子含义]\n"
+        #         "**正确选项及其含义**：[正确选项的汉字, 以及其含义]\n"
+        #         "[其他选项的汉字, 以及其含义（若有，不存在则不应当输出）]\n"),
+        Message(content=str(mondai)),
     ]
     
     stream = brain.general_analyse_stream(instruct_message, one_shot_messages, context_messages)
