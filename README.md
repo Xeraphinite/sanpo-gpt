@@ -4,14 +4,20 @@
 
 > 天気はいいから、散歩しましょう！
 
-👷 --  Under Construction   -- 👷
+**👷 -- ALL Under Construction   -- 👷**
 
-一个基于 `streamlit`, `litellm` 开发的大语言模型 JLPT 散步助手。
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://sanpogpt.streamlit.app)
 
+一个基于 [`streamlit`](https://streamlit.io/), [`litellm`](https://www.litellm.ai), [`pydantic`](https://docs.pydantic.dev/latest/) 开发的大语言模型 JLPT 散步助手。
+
+## 📦 项目结构
+
+![structure](./assets/core-image.png)
 
 ## 🌈 Features
 
-TODO.
+- **部署简单**: `streamlit` 提供了
+- **模块化**：通过简单修改 `plugins` 文件下的 `py` 文件，可以轻松自定义你所需要的大语言模型逻辑；
 
 ## 🚀 快速开始
 
