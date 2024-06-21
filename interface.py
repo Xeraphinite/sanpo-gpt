@@ -45,7 +45,7 @@ with st.form("question_form"):
 
 if submit:
     st.write("##### AI 解析")
-    if selected_option == "がいかく":
+    if m1.check_answer(selected_option):
         st.success("回答正确")
     else:
         st.error("回答错误")

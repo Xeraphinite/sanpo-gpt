@@ -7,7 +7,7 @@ class MultipleChoice(BaseModel):
     choices: list[str]           # 选项，一共 4 个选项
     answer_idx: int              # 正确答案的 index，从 0 开始
     
-    def check_answer(self, choice: str | int) -> bool:
+    def check_answer(self, choice: str | int | None) -> bool:
         if isinstance(choice, int):
             return choice == self.answer_idx
         else:
