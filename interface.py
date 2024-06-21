@@ -1,16 +1,15 @@
 """
-    streamlit interface for JLPT questions.
+    Streamlit interface. The main entry point for the application.
+    You can run this script by executing `streamlit run interface.py` in the terminal. Make sure you have proper environment setup.
 """
 
 import streamlit as st
-from plugins import KanjiMondai
-from core.brain import Brain
+from plugins import (
+    KanjiMondai,
+    mondai1_analyse
+)
 
-
-# mondais = csv_to_kanji_mondais("data/mock/mock.csv")
-# mondai_id, instruction = mondais[0].MONDAI_ID, mondais[0].INSTRUCTION
-brain = Brain()
-
+# TODO: replace with real data
 m1 = KanjiMondai(
     id=1,
     description="これから<u><b>概略</b></u>をご説明します。",
@@ -51,6 +50,6 @@ if submit:
     else:
         st.error("回答错误")
     
-    stream = brain.general_analyse_stream(m1)
+    stream = mondai1_analyse(m1)
     
     st.write_stream(stream=stream)
