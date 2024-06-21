@@ -14,7 +14,7 @@ class MultipleChoice(BaseModel):
             return choice == self.choices[self.answer_idx]
     
     def __str__(self):
-        return f"{self.id}. {self.description}\n" + " ".join([f"{i + 1}. {self.choices[i]}" for i in range(4)])
+        return f"{self.id}. {self.description}\n" + " ".join([f"{i + 1}. {self.choices[i]}" for i in range(4)]) + f"\nAnswer: {self.choices[self.answer_idx]}"
         
 class MondaiSet(BaseModel):
     instruction: str                    # 大题的题干

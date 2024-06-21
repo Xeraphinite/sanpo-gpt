@@ -78,8 +78,7 @@ def mondai1_analyse(mondai: KanjiMondai) -> Generator:
     ]
 
     context_messages = [
-        Message(role="user", content=mondai.INSTRUCTION),
-        Message(role="user", content=mondai.description),
+        Message(content=str(mondai), role="user")
     ]
     
     stream = brain.general_analyse_stream(instruct_message, one_shot_messages, context_messages)
