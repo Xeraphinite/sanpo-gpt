@@ -8,7 +8,7 @@ from core import (
 
 class KanjiMondai(MultipleChoice):
     INSTRUCTION: ClassVar = "問題 1 &nbsp&nbsp  <u>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</u>の言葉の読み方として最もよいものを、1・2・3・4から一つ選びなさい。"
-    MONDAI_ID: ClassVar   = 1
+    MONDAI_ID:   ClassVar = 1
 
 def csv_to_kanji_mondais(path: str):
     """Read Kanji Mondai from csv file, return a list of kanji mondai.
